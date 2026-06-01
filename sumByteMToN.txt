@@ -1,0 +1,28 @@
+# Ths program compute the sum of integers between M to N (inclusively)
+.TEXT
+	ADDI    $1,  $0,  2   #  M=2
+    ADDI    $2,  $0,  10  #  N=10 
+	ADD     $3,  $0,  $0  # sum = 0
+	ADD     $4,  $0,  $0  # negative_sum = 0
+	ADD     $5,  $0,  $1   #  index = M, M+1, M+2, ..., N
+LOOP:
+	NOP
+	NOP
+	ADD		$3,  $3, $5		# sum += index
+	SUB		$4,  $4, $5		# negative_sum -= index
+
+	ADDI	$5,  $5, 1		# index++ 
+	NOP
+	NOP
+	BNE     $5, $2, LOOP   # do until index==N 
+	NOP
+
+DONE:
+	SB		$1,  1($0)		# 
+	SB		$2,  2($0)		#
+	SB		$3,  3($0)		# 
+	SB		$4,  4($0)		# 
+	SB		$5,  5($0)		# 
+	SB		$6,  6($0)		# 
+	SB		$7,  7($0)		# 
+	stop

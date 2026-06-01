@@ -1,0 +1,24 @@
+.text
+# ADDI  $1, $0, -122
+ADDI   $1, $0, -30      # machine code = 3062 
+NOP
+NOP
+ADD   $1, $1, $1      # machine code = 2248 
+NOP
+NOP
+ADD   $1, $1, $1      # machine code = 2248 
+NOP
+NOP
+ADDI   $1, $1, -2      # machine code = 327E 
+NOP
+NOP
+SB   $1, 0($0)      # machine code = 5040 
+LB   $1, 0($0)      # machine code = 4040 
+LB   $2, 1($0)      # machine code = 4081 
+LB   $3, 2($0)      # machine code = 40C2 
+LB   $4, 3($0)      # machine code = 4103 
+LB   $5, 4($0)      # machine code = 4144 
+LB   $6, 5($0)      # machine code = 4185 
+LB   $7, 6($0)      # machine code = 41C6 
+stop
+#BEQ   $7, $7, -1      # machine code = EFFF

@@ -1,0 +1,43 @@
+# The following program implements Euclidean algorithm to compute the GCD of 
+# two numbers stored in the first two bytes of data memory. 
+# The result is stored in the 3rd byte of the data memory.
+# You cannot use any DIV instruction. 
+
+.text
+
+MAIN:
+  	ADDI      $1,  $0,   14   # A 14 (or 26)
+  	ADDI      $2,  $0,   21   # B 21 (or 39)
+    NOP
+  	SB        $1,  0($0)      #  A: 0100, 000,001, 00 0000
+  	SB        $2,  1($0)      #  B: 0100, 000,010, 00 0001
+LOOP:
+  	BEQ       $1,   $2,  DONE
+  	SLT       $3,  $1,  $2    # 
+    NOP
+	NOP
+  	BNE       $3,  $0,  Blarger
+    NOP
+Alarger:
+  SUB       $1,   $1, $2
+	J       LOOP
+  NOP
+Blarger:
+  	SUB       $2,   $2, $1
+  	J     	LOOP
+    NOP
+
+DONE:
+  	SB        $2, 2($0)
+  	LB        $1, 0($0)
+  	LB        $2, 1($0)
+  	LB        $3, 2($0)
+    ADDI      $4,  $0,  -1
+    NOP
+    NOP
+	SB        $4, 3($0)
+    ADDI      $5,  $0,   0
+    ADDI      $6,  $0,   0
+    ADDI      $7,  $0,   0
+EXIT:
+	stop

@@ -1,0 +1,44 @@
+
+# implment do while loop
+.data
+	ARRAY: 	.byte 4,5,6,7,8,9
+	SUM:	.byte 0
+
+.text
+    ADDI     $1, $0,   4
+    ADDI     $2, $0,   5
+    ADDI     $3, $0,   6
+    ADDI     $4, $0,   7
+    ADDI     $5, $0,   8
+    ADDI     $6, $0,   9
+    ADDI     $7, $0,   0
+    SB       $1, 0($0)
+    SB       $2, 1($0)
+    SB       $3, 2($0)
+    SB       $4, 3($0)
+    SB       $5, 4($0)
+    SB       $6, 5($0)
+    SB       $7, 6($0)
+
+	LI		$5, 0	# pointer to ARRAY, starting t the base address
+	LI		$6, 0    	# sum
+	LI		$7, 6	    # result
+LOOP:
+	LB      $4, 0($5)	# $4 = A+0
+    NOP
+    NOP
+	ADD		$6, $6, $4  # sum +=  *A
+	ADDI	$5,	$5,	1   # advance point by 1 byte,  $5 += 1
+    NOP
+    NOP
+	BNE     $5, $7,  LOOP    # LOOP continue if $5 != $7
+DONE:
+	SB		$6, 0($7)
+    LB      $1, 0($0)
+    LB      $2, 1($0)
+    LB      $3, 2($0)
+    LB      $4, 3($0)
+    LB      $5, 4($0)
+    LB      $6, 5($0)
+    LB      $7, 6($0)
+	stop

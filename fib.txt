@@ -1,0 +1,34 @@
+# Example 1: 
+# The following program computes the first 12 Fibonacci numbers and stores 
+# them in the first 12 bytes in the data memory. 
+# The compiled binary codes are provided in the comments
+
+
+MAIN:
+  ADD       $1,  $0,  $0    # $1 = 0
+  ADDI      $2,  $0,  1 	# $2 = 1
+  ADDI      $4,  $0,  0 	# index $4 = 0  
+  NOP
+  NOP
+  SB        $0,  0($4)        
+  SB        $2,  1($4)        
+LOOP:
+  ADD       $3,   $1, $2    # $3 = $1 + $2 # 0010,001,010,011,000
+  NOP
+  NOP
+  SB        $3,   2($4)        
+  ADDI      $4,   $4,  1    # $4 += 1   # 0011,100,100,000001
+  NOP
+  NOP
+  ADDI      $5,   $4,  -20  # 
+  ADD       $1,   $0,  $2   # $1 = $2   
+  ADD       $2,   $0,  $3   # $2 = $3  
+  BNE       $5,   $0,   LOOP  #  1101  101 000 111 000
+  LB        $1,   1($0)     # 
+  LB        $2,   2($0)     # 
+  LB        $3,   3($0)     # 
+  LB        $4,   4($0)     # 
+  LB        $5,   5($0)     # 
+  LB        $6,   6($0)     # 
+  LB        $7,   7($0)     # 
+  stop

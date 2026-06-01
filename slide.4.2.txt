@@ -1,0 +1,6 @@
+.text
+	addi $1, $0, 1
+	addi $2, $0, 2
+	NOP
+	addi $3, $1, 2
+	stop

@@ -1,0 +1,7 @@
+.text
+	addi  $1, $0, 1
+	addi  $2, $0, 2
+	NOP
+	SB    $1, 1($0)
+	SB    $2, 2($0)
+	stop

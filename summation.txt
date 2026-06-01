@@ -1,0 +1,68 @@
+#Example 2: 
+#The following program computes the sum of the absolute value of integers 
+# in a list that begins at location 0 and ends with a sentinel number 0x00 
+# in the data memory.
+# The sum is stored at the locaton after 0x00 
+
+.text
+MAIN:
+  ADDI      $1,   $0,    1
+  ADDI      $2,   $0,    2
+  ADDI      $3,   $0,    3
+  ADDI      $4,   $0,    4
+  ADDI      $5,   $0,    5
+  SB        $1,   0($0)     # load the number
+  SB        $2,   1($0)     # load the number
+  SB        $3,   2($0)     # load the number
+  SB        $4,   3($0)     # load the number
+  SB        $5,   4($0)     # load the number
+  SB        $0,   5($0)     # load the number
+
+  ADDI      $1,   $0,    0   # sum
+  ADDI      $2,   $0,   0    # index
+
+LOOP:
+  NOP
+  NOP
+  LB        $3,   0($2)     # load the number pointed by index $2
+							# $3 = A[$2]
+							# hex code: 44c0
+  NOP
+  NOP
+  BEQ       $3,   $0, DONE  # 1110  011 000 000 110   6  
+							# hex code: e606
+  NOP
+  SLT       $4,   $3, $0    # 0111 011 000 100 000 
+							# hex code: 7620
+  NOP
+  NOP
+  BEQ       $4,   $0, NON_NEGATIVE # 1
+							# 1110 100 000 000 001 
+							# hex code: E801
+  NOP
+  SUB       $3,   $0, $3    # 0110  000  011 011 000
+						    # hex code: 60D8 
+NON_NEGATIVE:
+  NOP
+  NOP
+  ADD		$1,   $1, $3	# 0010,001,011,001,000 
+							# hex code: 22c8   
+							# $1 += $3 (sum)
+  ADDI      $2,   $2,  1    # index++
+							# 0011,010,010,000001
+                            # hex code: 3481
+  J        	LOOP        	# JUMP to absolute address LOOP 
+							# hex code: F002
+  NOP
+DONE:
+  SB		$1,  1($2)       # 0101, 010, 001, 000 001
+							# hex code: 5441
+							# store sum in $1 to the end of the array
+  LB        $1,  0($0)
+  LB        $2,  1($0)
+  LB        $3,  2($0)
+  LB        $4,  3($0)
+  LB        $5,  4($0)
+  LB        $6,  5($0)
+  LB        $7,  6($0)
+  stop
